@@ -35,6 +35,7 @@ function part2(input) {
 }
 
 const currentDayInput = process.argv.slice(1)[0].split('\\').pop().split('.')[0] + ".txt"
+const Dayinput = Helper.textToString(process.argv.length > 2 ? process.argv[2] : currentDayInput)
 
-console.log("part 1:", part1(Helper.textToString(process.argv.length > 2 ? process.argv[2] : currentDayInput)))
-console.log("part 2:", part2(Helper.textToString(process.argv.length > 2 ? process.argv[2] : currentDayInput)))
+console.log("part 1:", part1(Dayinput))
+console.log("part 2:", part2(Dayinput))
