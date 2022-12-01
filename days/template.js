@@ -1,15 +1,19 @@
 import Helper from '../helpers.js'
 
-function part1(input){
+function preparation (input){
 
+    return 0
+}
+
+function part1(input){
+    preparation(input)
     
 
     return 0
 }
 
 function part2(input){
-    
-
+    preparation(input)
 
 
     return 0
