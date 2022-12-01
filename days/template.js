@@ -19,5 +19,7 @@ function part2(input){
     return 0
 }
 
-console.log("part 1:", part1(Helper.textToString('test.txt')))
-console.log("part 2:", part2(Helper.textToString('test.txt')))
+const currentDayInput = process.argv.slice(1)[0].split('\\').pop().split('.')[0] + ".txt"
+
+console.log("part 1:", part1(Helper.textToString(process.argv.length > 2 ? process.argv[2] : currentDayInput)))
+console.log("part 2:", part2(Helper.textToString(process.argv.length > 2 ? process.argv[2] : currentDayInput)))
