@@ -18,7 +18,7 @@ I use `node.js` to run my code. So to run a specific day, you need to use the fo
 node .\days\dayX.js //exchange X with the days number
 ```
 
-Each `dayX.js`file, automatically reads the input for the certain day (`dayX.txt`). If you want the day to use a specific `.txt` file, you have to write the name of the file as an argument when running the day in the command line.
+Each `dayX.js` file, automatically reads the input for the certain day (`dayX.txt`). If you want the day to use a specific `.txt` file, you have to write the name of the file as an argument when running the day in the command line.
 The command then will look like this:
 
 ```sh
