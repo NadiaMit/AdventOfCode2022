@@ -3,31 +3,22 @@ import Helper from '../helpers.js'
 const currentDay = process.argv.slice(1)[0].split('\\').pop().split('.')[0] + ".txt"
 const input = Helper.textToString(process.argv.length > 2 ? process.argv[2] : currentDay)
 
-const rockEnemy = 'A'
-const rockME = 'X'
-const paperEnemy = 'B'
-const paperME = 'Y'
-const scissorEnemy = 'C'
-const scissorME = 'Z'
-const loose = 'X'
-const draw = 'Y'
-const win = 'Z'
-
 function part1(){
     let score = 0;
-    let moves = []
+    let enemy = ''
+    let me = ''
     input.forEach(game => {
-        moves = game.split(' ')
-        switch(moves[1]){
-            case rockME: score += 1; break;
-            case paperME: score += 2; break;
-            case scissorME: score += 3; break;
+        [enemy, me] = game.split(' ')
+        switch(me){
+            case 'X': score += 1; break;
+            case 'Y': score += 2; break;
+            case 'Z': score += 3; break;
         }
         
-        if(moves[1] === rockME && moves[0] === scissorEnemy || moves[1] === paperME && moves[0] === rockEnemy || moves[1] === scissorME && moves[0] === paperEnemy){
+        if(me === 'X' && enemy === 'C' || me === 'Y' && enemy === 'A' || me === 'Z' && enemy === 'B'){
             score += 6
         }
-        else if(moves[1] === rockME && moves[0] === rockEnemy || moves[1] === paperME && moves[0] === paperEnemy || moves[1] === scissorME && moves[0] === scissorEnemy){
+        else if(me === 'X' && enemy === 'A' || me === 'Y' && enemy === 'B' || me === 'Z' && enemy === 'C'){
             score += 3
         }
 
@@ -38,32 +29,38 @@ function part1(){
 
 function part2(){
     let score = 0;
-    let moves = []
+    let enemy = ''
+    let me = ''
+
+    const loose = 'X'
+    const draw = 'Y'
+    const win = 'Z'
+
     input.forEach(game => {
-        moves = game.split(' ')
-        switch(moves[1]){
+        [enemy, me] = game.split(' ')
+        switch(me){
             case loose: { 
-                switch(moves[0]){
-                    case rockEnemy: score += 3; break;
-                    case paperEnemy: score += 1; break;
-                    case scissorEnemy: score += 2; break;
+                switch(enemy){
+                    case 'A': score += 3; break;
+                    case 'B': score += 1; break;
+                    case 'C': score += 2; break;
                 }
                 score += 0; 
                 break;
             }
             case draw: {
-                switch(moves[0]){
-                    case rockEnemy: score += 1; break;
-                    case paperEnemy: score += 2; break;
-                    case scissorEnemy: score += 3; break;
+                switch(enemy){
+                    case 'A': score += 1; break;
+                    case 'B': score += 2; break;
+                    case 'C': score += 3; break;
                 }
                 score += 3; break;
             }
             case win: {
-                switch(moves[0]){
-                    case rockEnemy: score += 2; break;
-                    case paperEnemy: score += 3; break;
-                    case scissorEnemy: score += 1; break;
+                switch(enemy){
+                    case 'A': score += 2; break;
+                    case 'B': score += 3; break;
+                    case 'C': score += 1; break;
                 }
                 score += 6; break;
             }
@@ -72,8 +69,6 @@ function part2(){
 
     return score
 }
-
-
 
 console.log("part 1:", part1())
 console.log("part 2:", part2())
