@@ -14,5 +14,20 @@ export default {
         const text = FileReader.readFileSync(path+file, 'utf8')
         const input = text.split('\r\n')
         return input
+    },
+
+    checkSameLetter: (first, second, third = '') =>{
+        let letter = ''
+
+        for(const char of first){
+            if(second.search(char) !== -1){
+                if(third === '' || third.search(char) !== -1){
+                    letter = char
+                    break
+                }
+            }
+        }
+
+        return letter
     }
 }
