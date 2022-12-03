@@ -15,7 +15,6 @@ function calculateLetter(letter){
     }
 }
 
-
 function part1(){
     let sum = 0;
     let sameLetter = ''
