@@ -3,57 +3,65 @@ import Helper from '../helpers.js'
 const currentDay = process.argv.slice(1)[0].split('\\').pop().split('.')[0] + ".txt"
 const input = Helper.textToStringArray(process.argv.length > 2 ? process.argv[2] : currentDay)
 
-const fileSystem = {
+const root = {
     parent: null,
     name: '/',
-    files: 0,
+    size: 0,
     directories: []
 }
 
-let currentDirectory = fileSystem
+let currentDirectory = root
 
+let splittedLine = []
 function preparation(){
     input.forEach(line => {
-        if(line[0] === '$'){
-            if(line.split(' ')[1] == 'cd'){
-                if(line.split(' ')[2] === '..'){
-                    currentDirectory = currentDirectory.parent
-                }
-                else{
-                    currentDirectory.directories.forEach(dir => {
-                        if(dir.name === line.split(' ')[2]){
-                            currentDirectory = dir
+        splittedLine = line.split(' ')
+        switch(splittedLine[0]){
+            case '$': {
+                if(splittedLine[1] === 'cd'){
+                    switch(splittedLine[2]){
+                        case '..': {
+                            currentDirectory = currentDirectory.parent
+                            break
                         }
-                    })
+                        case '/': {
+                            currentDirectory = root
+                            break
+                        }
+                        default: {
+                            currentDirectory.directories.forEach(dir => {
+                                if(dir.name === line.split(' ')[2]){
+                                    currentDirectory = dir
+                                }
+                            })
+                            break
+                        }
+                    }
                 }
+                break
             }
-        }
-        else if(line.split(' ')[1] !== 'ls'){
-            if(line.includes('dir')){
-                currentDirectory.directories.push({parent: currentDirectory, name: line.split(' ')[1], files: 0, directories:[]})
+            case 'dir': {
+                currentDirectory.directories.push({parent: currentDirectory, name: splittedLine[1], size: 0, directories:[]})
+                break
             }
-            else{
-                currentDirectory.files += parseInt(line.split(' ')[0])
+            default: {
+                addFile(currentDirectory, parseInt(splittedLine[0]))
             }
         }
     })
 }
 
-function calculateSize(dir){
-    let size = 0;
-    
-    size+= dir.files
-
-    dir.directories.forEach(d => {
-        size += calculateSize(d)
-    })
-    return size
+function addFile(dir, size){
+    dir.size += size
+    if(dir.parent !== null){
+        addFile(dir.parent, size)
+    }
 }
 
 function calculateSumSmaller(dir, upperLimit){
     let sum = 0
-    if(calculateSize(dir) <= upperLimit){
-        sum += calculateSize(dir)
+    if(dir.size <= upperLimit){
+        sum += dir.size
     }
     
     dir.directories.forEach(dir => {
@@ -65,8 +73,8 @@ function calculateSumSmaller(dir, upperLimit){
 
 const biggerDirs = []
 function checkIfBigger(dir, underLimint){
-    if(calculateSize(dir) >= underLimint){
-        biggerDirs.push(calculateSize(dir))
+    if(dir.size >= underLimint){
+        biggerDirs.push(dir.size)
     }
 
     dir.directories.forEach(dir => {
@@ -75,14 +83,13 @@ function checkIfBigger(dir, underLimint){
 }
 
 function part1(){
-    return calculateSumSmaller(fileSystem, 100000)
+    return calculateSumSmaller(root, 100000)
 }
 
 function part2(){
-    let freeSpace = 70000000 - calculateSize(fileSystem)
-    let spaceNeeded = 30000000 - freeSpace
+    let spaceNeeded = 30000000 - (70000000 - root.size)
 
-    checkIfBigger(fileSystem, spaceNeeded)
+    checkIfBigger(root, spaceNeeded)
 
     return Math.min(...biggerDirs)
 }
