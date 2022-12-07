@@ -3,44 +3,13 @@ import Helper from '../helpers.js'
 const currentDay = process.argv.slice(1)[0].split('\\').pop().split('.')[0] + ".txt"
 const input = Helper.textToStringArray(process.argv.length > 2 ? process.argv[2] : currentDay)
 
-class Directory{
-    parent = null;
-    name = '';
-    files = [];
-    directories = [];
-
-    constructor(parent, name, files, directories){
-        this.parent = parent;
-        this.name = name;
-        this.files = files;
-        this.directories = directories;
-    }
-
-    calculateSize(){
-        let size = 0;
-        
-        this.files.forEach(file => {
-            size += file.size
-        })
-
-        this.directories.forEach(dir => {
-            size += dir.calculateSize()
-        })
-        return size
-    }
+const fileSystem = {
+    parent: null,
+    name: '/',
+    files: 0,
+    directories: []
 }
 
-class File{
-    name = '';
-    size = 0;
-
-    constructor(name, size){
-        this.name = name;
-        this.size = parseInt(size);
-    }
-}
-
-const fileSystem = new Directory(null,'/', [], [])
 let currentDirectory = fileSystem
 
 function preparation(){
@@ -61,19 +30,30 @@ function preparation(){
         }
         else if(line.split(' ')[1] !== 'ls'){
             if(line.includes('dir')){
-                currentDirectory.directories.push(new Directory(currentDirectory, line.split(' ')[1], [], []))
+                currentDirectory.directories.push({parent: currentDirectory, name: line.split(' ')[1], files: 0, directories:[]})
             }
             else{
-                currentDirectory.files.push(new File(line.split(' ')[1], line.split(' ')[0]))
+                currentDirectory.files += parseInt(line.split(' ')[0])
             }
         }
     })
 }
 
+function calculateSize(dir){
+    let size = 0;
+    
+    size+= dir.files
+
+    dir.directories.forEach(d => {
+        size += calculateSize(d)
+    })
+    return size
+}
+
 function calculateSumSmaller(dir, upperLimit){
     let sum = 0
-    if(dir.calculateSize() <= upperLimit){
-        sum += dir.calculateSize()
+    if(calculateSize(dir) <= upperLimit){
+        sum += calculateSize(dir)
     }
     
     dir.directories.forEach(dir => {
@@ -85,8 +65,8 @@ function calculateSumSmaller(dir, upperLimit){
 
 const biggerDirs = []
 function checkIfBigger(dir, underLimint){
-    if(dir.calculateSize() >= underLimint){
-        biggerDirs.push(dir.calculateSize())
+    if(calculateSize(dir) >= underLimint){
+        biggerDirs.push(calculateSize(dir))
     }
 
     dir.directories.forEach(dir => {
@@ -94,13 +74,12 @@ function checkIfBigger(dir, underLimint){
     })
 }
 
-
 function part1(){
     return calculateSumSmaller(fileSystem, 100000)
 }
 
 function part2(){
-    let freeSpace = 70000000 - fileSystem.calculateSize()
+    let freeSpace = 70000000 - calculateSize(fileSystem)
     let spaceNeeded = 30000000 - freeSpace
 
     checkIfBigger(fileSystem, spaceNeeded)
