@@ -3,6 +3,11 @@ import FileReader from 'fs'
 const path = 'inputs/'
 
 export default {
+    /**
+     * Read a file and return an array of integers
+     * @param {string} file - file name, has to be in the inputs folder
+     * @returns an array of integers
+     */
     textToIntArray: (file) =>{
         const text = FileReader.readFileSync(path+file, 'utf8')
         const input = []
@@ -10,12 +15,22 @@ export default {
         return input
     },
 
+    /**
+     * Read a file and return an array of strings
+     * @param {string} file - file name, has to be in the inputs folder
+     * @returns an array of strings
+     */
     textToStringArray: (file) =>{
         const text = FileReader.readFileSync(path+file, 'utf8')
         const input = text.split('\r\n')
         return input
     },
 
+    /**
+     * Read a file and return a string
+     * @param {string} file - file name, has to be in the inputs folder
+     * @returns a string
+     */
     textToString: (file) =>{
         const text = FileReader.readFileSync(path+file, 'utf8')
         return text
