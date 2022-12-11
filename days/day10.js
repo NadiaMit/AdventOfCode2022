@@ -38,10 +38,6 @@ function printPixels(pixels){
     }
 }
 
-Number.prototype.between = function(min, max) {
-    return this >= min && this <= max
-}
-
 function part2(){
     let registerX = 1
     const pixels = Array.from({length:6}, _ => {return Array.from({length:40}, _ => {return false})})
@@ -56,7 +52,7 @@ function part2(){
     }
 
     for(let ctrPos = 0; cycles.length>0; ctrPos++){
-        if((ctrPos%40).between(registerX-1, registerX+1)){
+        if(Math.abs(ctrPos%40-registerX) <=1){
             pixels[parseInt(ctrPos/40)][parseInt(ctrPos%40)] = true
         }
 
