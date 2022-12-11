@@ -3,19 +3,6 @@ import Helper from '../helpers.js'
 const currentDay = process.argv.slice(1)[0].split('\\').pop().split('.')[0] + ".txt"
 const input = Helper.textToStringArray(process.argv.length > 2 ? process.argv[2] : currentDay)
 
-function calculateOperation(operation, oldValue){
-    const [operationType, operationValue] = [operation.split(' ')[3], operation.split(' ')[4]]
-    
-    switch(operationType){
-        case '*':{
-            return oldValue*(operationValue === 'old'? oldValue: parseInt(operationValue))
-        }
-        case '+':{
-            return oldValue+(operationValue === 'old'? oldValue: parseInt(operationValue))
-        }
-    }
-}
-
 function getMonkeys(){
     const monkeys = []
 
@@ -31,7 +18,7 @@ function getMonkeys(){
                     break
                 }
                 case 'Operation':{
-                    monkeys[monkeys.length-1].operation = line.trim().replace('Operation: ','')
+                    monkeys[monkeys.length-1].operation = (old) => {return eval(line.trim().replace('Operation: new = ',''))}
                     break
                 }
                 case 'Test':{
@@ -59,7 +46,8 @@ function makeMonkeysThrow(rounds, divideWorry= false){
     for(let round = 1; round <=rounds; round++){
         for(const monkey of monkeys){
             for(;monkey.items.length > 0;){
-                let currItem = calculateOperation(monkey.operation, monkey.items.shift())
+                let currItem = monkey.items.shift()
+                currItem = monkey.operation(currItem)
                 monkey.inspections++
                 if(!divideWorry){
                     currItem = Math.floor(currItem / 3)
