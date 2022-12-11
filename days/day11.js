@@ -46,14 +46,13 @@ function makeMonkeysThrow(rounds, divideWorry= false){
     for(let round = 1; round <=rounds; round++){
         for(const monkey of monkeys){
             for(;monkey.items.length > 0;){
-                let currItem = monkey.items.shift()
-                currItem = monkey.operation(currItem)
+                let currItem = monkey.operation(monkey.items.shift())
                 monkey.inspections++
                 if(!divideWorry){
                     currItem = Math.floor(currItem / 3)
                 }
-                currItem % monkey.test === 0 ? monkeys[monkey.true].items.push(currItem) : monkeys[monkey.false].items.push(currItem)
-                
+                const nextMonkey = currItem % monkey.test === 0 ? monkey.true : monkey.false
+                monkeys[nextMonkey].items.push(currItem)
             }
         }
     }
