@@ -10,7 +10,6 @@ function getMonkeys(){
         if(line.includes('Monkey')){
             monkeys.push({items: [], operation: null, test: 0, true: 0, false: 0, inspections: 0})
         }
-
         else{
             switch(line.trim().split(': ')[0]){
                 case 'Starting items':{
@@ -40,19 +39,21 @@ function getMonkeys(){
     return monkeys
 }
 
-function makeMonkeysThrow(rounds, divideWorry= false){
+function makeMonkeysThrow(rounds, newReduce= false){
     const monkeys = getMonkeys()
+
+    const smallerWorry = monkeys.reduce((acc, curr) => acc * curr.test, 1)
 
     for(let round = 1; round <=rounds; round++){
         for(const monkey of monkeys){
             for(;monkey.items.length > 0;){
                 let currItem = monkey.operation(monkey.items.shift())
-                monkey.inspections++
-                if(!divideWorry){
-                    currItem = Math.floor(currItem / 3)
-                }
+                currItem = newReduce ? currItem % smallerWorry : Math.floor(currItem / 3)
+
                 const nextMonkey = currItem % monkey.test === 0 ? monkey.true : monkey.false
                 monkeys[nextMonkey].items.push(currItem)
+
+                monkey.inspections++
             }
         }
     }
@@ -62,4 +63,4 @@ function makeMonkeysThrow(rounds, divideWorry= false){
 }
 
 console.log("part 1:", makeMonkeysThrow(20))
-//console.log("part 2:", makeMonkeysThrow(10000, true))
+console.log("part 2:", makeMonkeysThrow(10000, true))
