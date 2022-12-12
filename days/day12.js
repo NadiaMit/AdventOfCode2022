@@ -4,12 +4,11 @@ const currentDay = process.argv.slice(1)[0].split('\\').pop().split('.')[0] + ".
 const input = Helper.textToStringArray(process.argv.length > 2 ? process.argv[2] : currentDay)
 
 const alphabet = "abcdefghijklmnopqrstuvwxyz"
+const heightMap = []
+let startPos = [0,0]
+let endPos = [0,0]
 
 function preparation(){
-    const heightMap = []
-    let startPos = [0, 0]
-    let endPos = [0, 0]
-
     for(let y = 0; y < input.length; y++){
         heightMap.push([])
         for(let x = 0; x < input[y].length; x++){
@@ -30,11 +29,9 @@ function preparation(){
             }
         }
     }
-
-    return [heightMap, startPos, endPos]
 }
 
-function getValidAdjacent(heightMap, currPos, reversed = false){
+function getValidAdjacent(currPos, reversed = false){
     const [y, x] = currPos
     const currHeight = heightMap[y][x]
     const adjacent = []
@@ -71,7 +68,7 @@ function getValidAdjacent(heightMap, currPos, reversed = false){
     return adjacent
 }
 
-function breadthFirstSearch(heightMap, startPos, reversed = false){
+function breadthFirstSearch(startPos, endFunction, reversed = false){
     const queue = []
     const visited = new Set()
     const steps = new Map()
@@ -82,7 +79,10 @@ function breadthFirstSearch(heightMap, startPos, reversed = false){
 
     while(queue.length > 0){
         const currPos = queue.shift()
-        const neighbours = getValidAdjacent(heightMap, currPos, reversed)
+        if(endFunction(currPos)){
+            return steps.get(`${currPos[0]},${currPos[1]}`)
+        }
+        const neighbours = getValidAdjacent(currPos, reversed)
         for(const adjacent of neighbours){
             if(!visited.has(`${adjacent[0]},${adjacent[1]}`) || steps.get(`${currPos[0]},${currPos[1]}`)+1 < steps.get(`${adjacent[0]},${adjacent[1]}`)){
                 steps.set(`${adjacent[0]},${adjacent[1]}`, steps.get(`${currPos[0]},${currPos[1]}`)+1)
@@ -91,29 +91,8 @@ function breadthFirstSearch(heightMap, startPos, reversed = false){
             }  
         }
     }
-
-    return steps
 }
 
-function part1(){
-    const [heightMap, startPos, endPos] = preparation()
-    return breadthFirstSearch(heightMap, startPos).get(`${endPos[0]},${endPos[1]}`)
-}
-
-function part2(){
-    const [heightMap, _, endPos] = preparation()
-    const steps =  breadthFirstSearch(heightMap, endPos, true)
-
-    for(let y = 0; y < heightMap.length; y++){
-        for(let x = 0; x < heightMap[y].length; x++){
-            if(heightMap[y][x] !== 0){
-                steps.delete(`${y},${x}`)
-            }
-        }
-    }
-
-    return Math.min(...steps.values())
-}
-
-console.log("part 1:", part1())
-console.log("part 2:", part2())
+preparation()
+console.log("part 1:", breadthFirstSearch(startPos, (currPos) => {return (currPos[0] === endPos[0] && currPos[1] === endPos[1])}))
+console.log("part 2:", breadthFirstSearch(endPos, (currPos) => {return heightMap[currPos[0]][currPos[1]] === 0}, true))
