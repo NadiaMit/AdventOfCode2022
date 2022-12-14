@@ -32,7 +32,7 @@ function part1(){
     let pairIndex = 1
     
     for(let left = 0; left < input.length; left+=2){
-        evaluatePairs(eval(input[left]), eval(input[left+1])) > 0 ? indexSum += pairIndex : indexSum += 0
+        evaluatePairs(JSON.parse(input[left]), JSON.parse(input[left+1])) > 0 ? indexSum += pairIndex : indexSum += 0
         pairIndex++
     }
 
@@ -42,7 +42,7 @@ function part1(){
 function part2(){
     input.push('[[2]]')
     input.push('[[6]]')
-    input.sort((a, b) => {return evaluatePairs(eval(a), eval(b))}).reverse()
+    input.sort((a, b) => {return evaluatePairs(JSON.parse(a), JSON.parse(b))}).reverse()
 
     return (input.indexOf('[[2]]')+1) * (input.indexOf('[[6]]')+1)
 }
