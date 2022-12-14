@@ -74,20 +74,20 @@ function breadthFirstSearch(startPos, endFunction, reversed = false){
     const steps = new Map()
 
     queue.push(startPos)
-    steps.set(`${startPos[0]},${startPos[1]}`, 0)
-    visited.add(`${startPos[0]},${startPos[1]}`)
+    steps.set(JSON.stringify(startPos), 0)
+    visited.add(JSON.stringify(startPos))
 
     while(queue.length > 0){
         const currPos = queue.shift()
         if(endFunction(currPos)){
-            return steps.get(`${currPos[0]},${currPos[1]}`)
+            return steps.get(JSON.stringify(currPos))
         }
         const neighbours = getValidAdjacent(currPos, reversed)
         for(const adjacent of neighbours){
-            if(!visited.has(`${adjacent[0]},${adjacent[1]}`) || steps.get(`${currPos[0]},${currPos[1]}`)+1 < steps.get(`${adjacent[0]},${adjacent[1]}`)){
-                steps.set(`${adjacent[0]},${adjacent[1]}`, steps.get(`${currPos[0]},${currPos[1]}`)+1)
+            if(!visited.has(JSON.stringify(adjacent)) || steps.get(JSON.stringify(currPos))+1 < steps.get(JSON.stringify(adjacent))){
+                steps.set(JSON.stringify(adjacent), steps.get(JSON.stringify(currPos))+1)
                 queue.push(adjacent)
-                visited.add(`${adjacent[0]},${adjacent[1]}`)
+                visited.add(JSON.stringify(adjacent))
             }  
         }
     }
