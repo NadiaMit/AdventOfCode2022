@@ -1,5 +1,4 @@
-![](https://img.shields.io/badge/stars%20⭐-31-yellow)
-![](<https://img.shields.io/badge/days%20completed%20📅-15(1/2)-blue>)
+![](https://img.shields.io/badge/stars%20⭐-32-yellow)
 
 # AdventOfCode2022
 
