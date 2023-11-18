@@ -1,4 +1,5 @@
 ![](https://img.shields.io/badge/stars%20⭐-33-yellow)
+![](https://img.shields.io/badge/days%20completed%20📅-18-blue)
 
 # Advent of Code 2022
 
