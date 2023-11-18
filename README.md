@@ -1,6 +1,6 @@
 ![](https://img.shields.io/badge/stars%20⭐-33-yellow)
 
-# AdventOfCode2022
+# Advent of Code 2022
 
 This was my try on the Advent of code of 2022 with JavaScript, sadly i only did 18 days (some only part 1), but I managed to get a total of 33 stars in the end and I learned a lot about JavaScript.
 
