@@ -1,9 +1,9 @@
 ![](https://img.shields.io/badge/stars%20⭐-33-yellow)
 ![](https://img.shields.io/badge/days%20completed%20📅-18-blue)
 
-# Advent of Code 2022
+# Advent of Code 2022 in JavaScript [![JavaScript](https://skillicons.dev/icons?i=js)](https://skillicons.dev)
 
-This was my try on the Advent of code of 2022 with JavaScript, sadly i only did 18 days (some only part 1), but I managed to get a total of 33 stars in the end and I learned a lot about JavaScript.
+This is my try on the Advent of code of 2022 challanges with JavaScript, sadly i only did 18 days (some only part 1), but I managed to get a total of 33 stars in the end and I learned a lot about JavaScript.
 
 ## Structure
 
