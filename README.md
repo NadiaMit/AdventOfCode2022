@@ -3,7 +3,9 @@
 
 # Advent of Code 2022 in JavaScript [![JavaScript](https://skillicons.dev/icons?i=js)](https://skillicons.dev)
 
-This is my try on the Advent of code of 2022 challanges with JavaScript, sadly i only did 18 days (some only part 1), but I managed to get a total of 33 stars in the end and I learned a lot about JavaScript.
+This is my try on the Advent of code of 2022 challanges with JavaScript!
+
+I managed to complete 18 days (some only part 1) and got a total of 33 stars.
 
 ## Structure
 
