@@ -1,5 +1,6 @@
 ![](https://img.shields.io/badge/stars%20⭐-33-yellow)
-![](https://img.shields.io/badge/days%20completed%20📅-18-blue)
+![](https://img.shields.io/badge/days%20completed%20📅-15-blue)
+![](https://img.shields.io/badge/days_half_completed_🌗-3-white)
 
 # Advent of Code 2022 in JavaScript [![JavaScript](https://skillicons.dev/icons?i=js)](https://skillicons.dev)
 
