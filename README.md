@@ -6,8 +6,6 @@
 
 This is my try on the Advent of code of 2022 challanges with JavaScript!
 
-I managed to complete 18 days (some only part 1) and got a total of 33 stars.
-
 ## My Progress 33/50⭐
 
 - Day 1 - [Calorie Counting](https://adventofcode.com/2022/day/1): ⭐⭐
