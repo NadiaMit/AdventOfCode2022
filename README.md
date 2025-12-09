@@ -8,6 +8,30 @@ This is my try on the Advent of code of 2022 challanges with JavaScript!
 
 I managed to complete 18 days (some only part 1) and got a total of 33 stars.
 
+## My Progress 33/50⭐
+
+- Day 1 - [Calorie Counting](https://adventofcode.com/2022/day/1): ⭐⭐
+- Day 2 - [Rock Paper Scissors](https://adventofcode.com/2022/day/2): ⭐⭐
+- Day 3 - [Rucksack Reorganization](https://adventofcode.com/2022/day/3): ⭐⭐
+- Day 4 - [Camp Cleanup](https://adventofcode.com/2022/day/4): ⭐⭐
+- Day 5 - [Supply Stacks](https://adventofcode.com/2022/day/5): ⭐⭐
+- Day 6 - [Tuning Trouble](https://adventofcode.com/2022/day/6): ⭐⭐
+- Day 7 - [No Space Left On Device](https://adventofcode.com/2022/day/7): ⭐⭐
+- Day 8 - [Treetop Tree House](https://adventofcode.com/2022/day/8): ⭐⭐
+- Day 9 - [Rope Bridge](https://adventofcode.com/2022/day/9): ⭐⭐
+- Day 10 - [Cathode-Ray Tube](https://adventofcode.com/2022/day/10): ⭐⭐
+- Day 11 - [Monkey in the Middle](https://adventofcode.com/2022/day/11): ⭐⭐
+- Day 12 - [Hill Climbing Algorithm](https://adventofcode.com/2022/day/12): ⭐⭐
+- Day 13 - [Distress Signal](https://adventofcode.com/2022/day/13): ⭐⭐
+- Day 14 - [Regolith Reservoir](https://adventofcode.com/2022/day/14): ⭐⭐
+- Day 15 - [Beacon Exclusion Zone](https://adventofcode.com/2022/day/15): ⭐⭐
+- ...
+- Day 17 - [Pyroclastic Flow](https://adventofcode.com/2022/day/17): ⭐
+- Day 18 - [Boiling Boulders](https://adventofcode.com/2022/day/18): ⭐
+- ...
+- Day 21 - [Monkey Math](https://adventofcode.com/2022/day/21): ⭐
+- ...
+
 ## Structure
 
 - `days`: the code for each day will be in the days folder as a `.js` file. My template is also there, so that I can start each day with the same structure.
